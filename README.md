@@ -11,7 +11,7 @@
 2. Install the global requirements:
 
    ```
-   $ npm install -g gulp bower browserify
+   $ sudo npm install -g gulp bower browserify
    ```
 
 3. Install the local requirements: 
