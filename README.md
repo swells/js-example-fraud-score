@@ -4,6 +4,7 @@
 
    ```
    $ git clone https://github.com/swells/js-example-fraud-score.git
+   $ cd js-example-fraud-score
 
    ```
 
