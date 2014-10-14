@@ -1,6 +1,10 @@
 ## Quick Start
 
-1. Clone the repo
+
+1. Download [Node.js](http://nodejs.org/download/)
+
+
+2. Clone the repo
 
    ```
    $ git clone https://github.com/swells/js-example-fraud-score.git
@@ -8,23 +12,23 @@
 
    ```
 
-2. Install the global requirements:
+3. Install the global requirements:
 
    ```
    $ sudo npm install -g gulp bower browserify
    ```
 
-3. Install the local requirements: 
+4. Install the local requirements: 
 
    ```
    $ npm install
    ```
 
-4. Run locally: 
+5. Run locally: 
 
    ```
    $ gulp
    ```
 
-5.  View in browser at `http://localhost:9080`
+6.  View in browser at `http://localhost:9080`
 
