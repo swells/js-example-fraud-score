@@ -1,7 +1,7 @@
 ## Quick Start
 
 
-1. Download [Node.js](http://nodejs.org/download/)
+1. Download and install [Node.js](http://nodejs.org/download/), which ships with npm. Then do:
 
 
 2. Clone the repo
