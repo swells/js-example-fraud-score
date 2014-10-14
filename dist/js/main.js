@@ -1,1 +1,0 @@
-!function(){"use strict";var r=require("./controllers/mainctrl");angular.module("SampleApp",["ngRoute","ui.bootstrap"]).config(["$locationProvider","$routeProvider",function(r,o){r.hashPrefix("!"),o.when("/",{templateUrl:"./partials/stats.html",controller:"MainController"}).otherwise({redirectTo:"/"})}]).controller("MainController",["$scope","$http",r])}();
