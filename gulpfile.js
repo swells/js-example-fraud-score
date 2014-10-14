@@ -1,12 +1,8 @@
 var gulp       = require('gulp'),
     jshint     = require('gulp-jshint'),
-    uglify     = require('gulp-uglify'),
-    minifyCSS  = require('gulp-minify-css'),
     browserify = require('gulp-browserify'),
-    concat     = require('gulp-concat'),
     server     = require('gulp-express'),
     unzip      = require('gulp-unzip');
-//var browserify = require('browserify');
 
 gulp.task('deployr-deps', function(){  
   gulp.src('./.modules/*.zip')
@@ -23,22 +19,6 @@ gulp.task('lint', function() {
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
-});
-
-gulp.task('minify-css', function() {
-  var opts = {comments:true,spare:true};
-  gulp.src(['./client/app/**/*.css', '!./client/app/bower_components/**'])
-    .pipe(minifyCSS(opts))
-    .pipe(gulp.dest('./dist/'))
-});
-
-gulp.task('minify-js', function() {
-  gulp.src(['./client/app/**/*.js', '!./client/app/bower_components/**'])
-    .pipe(uglify({
-      // inSourceMap:
-      // outSourceMap: "app.js.map"
-    }))
-    .pipe(gulp.dest('./dist/'))
 });
 
 gulp.task('copy-bower-components', function () {
