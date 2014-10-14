@@ -5,8 +5,8 @@
  * Apache License. This program is distributed WITHOUT
  * ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING THOSE OF NON-INFRINGEMENT,
  * MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. Please refer to the
- * Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0) for more details.
- *
+ * Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0) for more 
+ * details.
  */
 
 /*
@@ -16,9 +16,9 @@
  *
  * Initialization:
  *
- * Establishes STOMP connection on /fraudengine, subscribes on /topic/fraud.
+ * Establishes WS connection on /fraudengine, subscribes on /topic/fraud.
  *
- * STOMP message events:
+ * Events:
  *
  * FRAUDSCORE - RTask result message.
  * RUNTIMESTATS - RBroker runtime statistics message.
@@ -33,135 +33,129 @@
  */
 module.exports = function($scope, $http) {
 
-    //
-    // ng-controller model on $scope.
-    //
-    $scope.brokerInitialized = false;
-    $scope.alertMessage = null;
+   //
+   // ng-controller model on $scope.
+   //
+   $scope.brokerInitialized = false;
+   $scope.alertMessage = null;
 
-    $scope.fraudScoreResults = [];
-    $scope.poolSize = 1;
-    $scope.taskCount = 1;
+   $scope.fraudScoreResults = [];
+   $scope.poolSize = 1;
+   $scope.taskCount = 1;
 
-    $scope.runtimeStats = {
-        requestedPoolSize: 1,
-        allocatedPoolSize: 1,
-        submittedTasks: 0,
-        successfulTasks: 0,
-        failedTasks: 0,
-        averageCodeExecution: 0,
-        averageServerOverhead: 0,
-        averageNetworkLatency: 0
-    };
+   $scope.runtimeStats = {
+      requestedPoolSize: 1,
+      allocatedPoolSize: 1,
+      submittedTasks: 0,
+      successfulTasks: 0,
+      failedTasks: 0,
+      averageCodeExecution: 0,
+      averageServerOverhead: 0,
+      averageNetworkLatency: 0
+   };
 
-    $scope.targetTaskThroughput = 0;
-    $scope.currentTaskThroughput = 0;
-    $scope.startTaskThroughput = 0;
-    $scope.secondTaskThroughput = 0;
-    $scope.minuteTaskThroughput = 0;
+   $scope.targetTaskThroughput = 0;
+   $scope.currentTaskThroughput = 0;
+   $scope.startTaskThroughput = 0;
+   $scope.secondTaskThroughput = 0;
+   $scope.minuteTaskThroughput = 0;
 
-    if (!$scope.socketInitialized) {
+   //
+   // Resize Button Handler:
+   //
+   $scope.resizePool = function() {
+      $scope.alertMessage = 'RBroker pool is initializing. ' +
+         'Requested ' + $scope.poolSize + ' R session(s) in the pool. ' +
+         'This may take some time. Please wait.';
+      $scope.brokerInitialized = false;
 
-        var primus = Primus.connect('ws://localhost:9080');
+      console.log('Attempt to resize pool succeeded, new size=' + $scope.poolSize);
 
-        // Subscribe for events on /topic/fraud.
-        primus.on('open', function() {
+      $http.post('/fraud/pool/init/' + $scope.poolSize)
+         .success(function(data, status, headers, config) {
+            $scope.alertMessage = null;
+            console.log('Attempt to resize pool succeeded, new size=' + $scope.poolSize);
+         }).error(function(data, status, headers, config) {
+            $scope.errorMessage = 'Attempt to resize pool failed, error=' + data;
+         }).finally(function() {
+            $scope.fraudScoreResults = [];
+            $scope.brokerInitialized = true;
+            $scope.currentTaskThroughput = 0;
+            $scope.secondTaskThroughput = 0;
+            $scope.minuteTaskThroughput = 0;
 
-            primus.on('/topic/fraud', function(msg) {
-                var msgObj = msg; 
+         });
+   };
 
-                if (msgObj.msgType == 'FRAUDSCORE') {
+   //
+   // Execute Button Handler:
+   //
+   $scope.executeTasks = function() {
+      $scope.currentTaskThroughput = 0;
+      $scope.secondTaskThroughput = 0;
+      $scope.minuteTaskThroughput = 0;
+      $scope.targetTaskThroughput = $scope.taskCount;
+      $scope.startTaskThroughput = Date.now();
 
-                    var elapsedTime = Date.now() - $scope.startTaskThroughput;
+      $http.get('/fraud/score/' + $scope.taskCount)
+         .success(function(data, status, headers, config) {
+            console.log('Attempt to execute tasks succeeded, taskCount=' + $scope.taskCount);
+         }).error(function(data, status, headers, config) {
+            $scope.errorMessage = 'Can\'t retrieve scores list!';
+            $scope.errorMessage = 'Attempt to execute tasks failed, error=' + data;
+         });
+   };
 
-                    // $apply to propogate change to model.
-                    $scope.$apply(function() {
+   var primus = Primus.connect('ws://localhost:9080');
 
-                        $scope.currentTaskThroughput += 1;
-                        var throughput =
-                            (1000 / elapsedTime) * $scope.currentTaskThroughput;
-                        $scope.secondTaskThroughput = 
-                            (throughput - (throughput % 0.01));
-                        $scope.minuteTaskThroughput =
-                            Math.round($scope.secondTaskThroughput * 60);
+   // Subscribe for events on /topic/fraud.
+   primus.on('open', function() {
 
-                        // Discard older fraudScore from fraudScoreResults
-                        // list to prevent browser rendering exhaustion.
-                        if ($scope.fraudScoreResults.length > 300) {
-                            $scope.fraudScoreResults.length = 150;
-                        }
-                        $scope.fraudScoreResults.unshift(msgObj);
-                    });
-                } else
-                if (msgObj.msgType == 'RUNTIMESTATS') {
-                    // $apply to propogate change to model.
-                    $scope.$apply(function() {
-                        $scope.alertMessage = null;
-                        $scope.runtimeStats = msgObj;
-                    });
-                } else
-                if (msgObj.msgType == 'CLIENTALERT') {
-                    // $apply to propogate change to model.
-                    $scope.$apply(function() {
-                        $scope.alertMessage = msgObj.msg;
-                    });
-                }
+      primus.on('/topic/fraud', function(msg) {
+         var msgObj = msg;
+
+         if (msgObj.msgType == 'FRAUDSCORE') {
+
+            var elapsedTime = Date.now() - $scope.startTaskThroughput;
+
+            // $apply to propgate change to model.
+            $scope.$apply(function() {
+
+               $scope.currentTaskThroughput += 1;
+               var throughput =
+                  (1000 / elapsedTime) * $scope.currentTaskThroughput;
+               $scope.secondTaskThroughput =
+                  +(Math.round((throughput - (throughput % 0.01)) + 'e+2') + 'e-2');
+               //(throughput - (throughput % 0.01));
+               $scope.minuteTaskThroughput =
+                  Math.round($scope.secondTaskThroughput * 60);
+
+               // Discard older fraudScore from fraudScoreResults
+               // list to prevent browser rendering exhaustion.
+               if ($scope.fraudScoreResults.length > 300) {
+                  $scope.fraudScoreResults.length = 150;
+               }
+               $scope.fraudScoreResults.unshift(msgObj);
             });
-        });
-
-        $scope.socketInitialized = true;
-
-    } // if $scope.socketInitialized
-
-    //
-    // Resize Button Handler:
-    //
-    $scope.resizePool = function() {
-        $scope.alertMessage = 'RBroker pool is initializing. ' +
-            'Requested ' + $scope.poolSize + ' R session(s) in the pool. ' +
-            'This may take some time. Please wait.';
-        $scope.brokerInitialized = false;
-        
-        console.log('Attempt to resize pool succeeded, new size=' + $scope.poolSize);
-        
-        $http.post('/fraud/pool/init/' + $scope.poolSize)
-            .success(function(data, status, headers, config) {
-                $scope.alertMessage = null;
-                console.log('Attempt to resize pool succeeded, new size=' + $scope.poolSize);
-            }).error(function(data, status, headers, config) {
-                $scope.errorMessage = 'Attempt to resize pool failed, error=' + data;
-            }).finally(function() {
-                $scope.fraudScoreResults = [];
-                $scope.brokerInitialized = true;
-                $scope.currentTaskThroughput = 0;
-                $scope.secondTaskThroughput = 0;
-                $scope.minuteTaskThroughput = 0;
-                
+         } else
+         if (msgObj.msgType == 'RUNTIMESTATS') {
+            // $apply to propogate change to model.
+            $scope.$apply(function() {
+               $scope.alertMessage = null;
+               $scope.runtimeStats = msgObj;
             });
-    };
-
-    //
-    // Execute Button Handler:
-    //
-    $scope.executeTasks = function() {    	
-        $scope.currentTaskThroughput = 0;
-        $scope.secondTaskThroughput = 0;
-        $scope.minuteTaskThroughput = 0;
-        $scope.targetTaskThroughput = $scope.taskCount;
-        $scope.startTaskThroughput = Date.now();
-        
-        $http.get('/fraud/score/' + $scope.taskCount)
-            .success(function(data, status, headers, config) {
-                console.log('Attempt to execute tasks succeeded, taskCount=' + $scope.taskCount);
-            }).error(function(data, status, headers, config) {
-                $scope.errorMessage = 'Can\'t retrieve scores list!';
-                $scope.errorMessage = 'Attempt to execute tasks failed, error=' + data;
+         } else
+         if (msgObj.msgType == 'CLIENTALERT') {
+            // $apply to propogate change to model.
+            $scope.$apply(function() {
+               $scope.alertMessage = msgObj.msg;
             });
-    };
+         }
+      });
 
-    //
-    // Initialize initial RBroker pool on application startup.
-    //
-    $scope.resizePool();
-
+      //
+      // Initialize initial RBroker pool on application startup.
+      //
+      $scope.resizePool();
+   });
 };

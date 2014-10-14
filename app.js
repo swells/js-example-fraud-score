@@ -16,6 +16,9 @@ var server = require('http').createServer(app);
 var primus = new Primus(server, { transformer: 'websockets', parser: 'JSON' });
 
 primus.on('connection', function (spark) {
+
+    console.log('connection');
+
     var fraudService = new FraudService(primus);
    
     router.get('/fraud/score/:tasks', function(req, res) {    	

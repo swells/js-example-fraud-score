@@ -12,6 +12,10 @@ var FRAUDMSGTOPIC = '/topic/fraud',
       error: 'CLIENTALERT'
     };
 
+var round = function(num) {    
+    return +(Math.round(num + 'e+2')  + 'e-2');
+};
+
 function FraudService(primus) {
    this.primus = primus;
    this.broker = null;
@@ -52,9 +56,9 @@ FraudService.prototype = {
    },
 
    buildTask: function(task) {
-      var bal = Math.abs(Math.random() * 25000),
-         trans = Math.abs(Math.random() * 100),
-         credit = Math.abs(Math.random() * 75);
+      var bal    = Math.abs(Math.random() * 25000),
+          trans  = Math.abs(Math.random() * 100),
+          credit = Math.abs(Math.random() * 75);
 
       return rbroker.pooledTask({
          filename: config.constants.REPO_SCRIPT,
@@ -160,18 +164,19 @@ FraudService.prototype = {
 
          if (stats.totalTasksRunToSuccess > 0) {
             runtime.averageCodeExecution =
-               stats.totalTimeTasksOnCode / stats.totalTasksRunToSuccess;
+               round(stats.totalTimeTasksOnCode / stats.totalTasksRunToSuccess);
 
             var avgTimeOnServer =
                stats.totalTimeTasksOnServer / stats.totalTasksRunToSuccess;
 
             runtime.averageServerOverhead =
-               avgTimeOnServer - runtime.averageCodeExecution;
+               round(avgTimeOnServer - runtime.averageCodeExecution);
 
             var avgTimeOnCall =
                stats.totalTimeTasksOnCall / stats.totalTasksRunToSuccess;
 
-            runtime.averageNetworkLatency = avgTimeOnCall - avgTimeOnServer;
+            runtime.averageNetworkLatency =
+               round(avgTimeOnCall - avgTimeOnServer);
          }
       }
 
@@ -188,10 +193,10 @@ FraudService.prototype = {
       return {
          msgType: MSG_TYPES.score,
          success: rTaskResult ? true : false,
-         balance: rinputs[0].value,
-         transactions: rinputs[1].value,
-         credit: rinputs[2].value,
-         score: rTaskResult ? rTaskResult.generatedObjects[0].value : 'EMPTY'
+         balance: round(rinputs[0].value),
+         transactions: round(rinputs[1].value),
+         credit: round(rinputs[2].value),
+         score: rTaskResult ? rTaskResult.generatedObjects[0].value : -1
       };
    }
 
