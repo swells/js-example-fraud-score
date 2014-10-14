@@ -1,8 +1,10 @@
 var gulp       = require('gulp'),
     jshint     = require('gulp-jshint'),
     browserify = require('gulp-browserify'),
+    concat     = require('gulp-concat'),
     server     = require('gulp-express'),
     unzip      = require('gulp-unzip');
+//var browserify = require('browserify');
 
 gulp.task('deployr-deps', function(){  
   gulp.src('./.modules/*.zip')
@@ -21,16 +23,6 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('copy-bower-components', function () {
-  gulp.src('./app/bower_components/**')
-    .pipe(gulp.dest('dist/bower_components'));
-});
-
-gulp.task('copy-html-files', function () {
-  gulp.src('./client/app/**/*.html')
-    .pipe(gulp.dest('dist/'));
-});
-
 gulp.task('browserify', function() {
   gulp.src(['client/app/js/main.js'])
   .pipe(browserify({
@@ -39,16 +31,6 @@ gulp.task('browserify', function() {
   }))
   .pipe(concat('bundled.js'))
   .pipe(gulp.dest('./client/app/js'))
-});
-
-gulp.task('browserifyDist', function() {
-  gulp.src(['client/app/js/main.js'])
-  .pipe(browserify({
-    insertGlobals: true,
-    debug: true
-  }))
-  .pipe(concat('bundled.js'))
-  .pipe(gulp.dest('./dist/js'))
 });
 
 gulp.task('server', function () {
