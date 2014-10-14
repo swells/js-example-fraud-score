@@ -193,9 +193,9 @@ FraudService.prototype = {
       return {
          msgType: MSG_TYPES.score,
          success: rTaskResult ? true : false,
-         balance: round(rinputs[0].value),
-         transactions: round(rinputs[1].value),
-         credit: round(rinputs[2].value),
+         balance: Math.round(rinputs[0].value),
+         transactions: Math.round(rinputs[1].value),
+         credit: Math.round(rinputs[2].value),
          score: rTaskResult ? rTaskResult.generatedObjects[0].value : -1
       };
    }
