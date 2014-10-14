@@ -1,0 +1,14 @@
+{
+	"host": "http://184.106.156.215:7300",
+	"credentials": {
+	   "username": "testuser",
+	   "password": "changeme"
+	},
+	"logging": false,
+	"constants" : {
+		"REPO_OWNER": "testuser",
+		"REPO_SCRIPT": "ccFraudScore.R",
+		"REPO_DIRECTORY": "example-fraud-score", 
+		"FRAUD_MODEL": "fraudModel.rData"
+	}
+}
