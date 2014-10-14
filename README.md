@@ -33,7 +33,7 @@ npm.
    $ npm install
    ```
 
-5. Set the DeployR server `host` location *if* not runnig at
+5. Set the DeployR server `host` location *if* not running at
    `http://localhost:7300` in the configuration file `config/config.json` 
 
 6. Run locally: 
@@ -197,7 +197,7 @@ gulpfile.js
 
 By default, the build configuration assumes an instance of the DeployR server
 is running on `localhost`. If your instance of DeployR is running at some
-other IP address then please udpate the `host` property in the configuration 
+other IP address then please update the `host` property in the configuration 
 file `config/config.json` as appropriate:
 
 ```
@@ -242,14 +242,14 @@ DeployR server instance then:
 1. Each user must update the `username` property in their `config/config.json`
 configuration file, each indicating the *username* of their own user account.
 
-2. The _Access Control_ setting for each of the R analytics file depencencies in 
+2. The _Access Control_ setting for each of the R analytics file dependencies in 
 the DeployR repository must be changed from _Private_ access to _Shared_ access.
 
 ## DeployR Integration Details
 
 #### R Analytics Dependencies
 
-DeployR-powered applications typically depend on repository-managed R analtyics
+DeployR-powered applications typically depend on repository-managed R analytics
 scripts, models and/or data files. See the _DeployR_ [Repository Manager](http://deployr.revolutionanalytics.com/documents/help/repo-man/) for details on how best to manage your own R analytics dependencies.
 
 This example depends on two repository-managed files:
