@@ -14,9 +14,8 @@ var express      = require('express'),
     config       = require('./config/config'), 
     FraudService = require('./server/service/fraud-service'),
     app          = express(),    
-    router        = express.Router();
+    router       = express.Router();
 
-//app.engine('html', require('ejs').renderFile);
 app.use('/', router);
 app.use(express.static(__dirname + '/client/app'));
 

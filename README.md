@@ -114,7 +114,7 @@ follows:
 Source:
 
 ```
-app.js
+server.js
 
 server/**/*
 ```

@@ -9,7 +9,7 @@
   },
   "main": "gulpfile.js",
   "author": "DeployR - Revolution Analytics Inc.",
-  "main": "app.js",
+  "main": "server.js",
   "dependencies": {
     "gulp": "^3.8.7",
     "gulp-jshint": "^1.8.4",

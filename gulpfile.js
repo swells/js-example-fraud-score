@@ -45,14 +45,13 @@ gulp.task('browserify', function() {
 gulp.task('server', function () {
     //start the server at the beginning of the task
     server.run({
-        file: 'app.js'
+        file: 'server.js'
     });
 
     //restart the server when file changes
     gulp.watch(['client/app/**/*.html'], server.notify);
     gulp.watch(['client/app/js/**/*.js'], ['lint', 'browserify']);
     gulp.watch(['client/app/css/**/*.css']);
-    //gulp.watch(['app.js', 'server/routes/**/*.js'], [server.run]);
 });
 
 gulp.task('default', ['lint', 'browserify', 'server'] );
