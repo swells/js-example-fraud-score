@@ -1,23 +1,32 @@
+/*
+ * Copyright (C) 2010-2014 by Revolution Analytics Inc.
+ *
+ * This program is licensed to you under the terms of Version 2.0 of the
+ * Apache License. This program is distributed WITHOUT
+ * ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING THOSE OF NON-INFRINGEMENT,
+ * MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. Please refer to the
+ * Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0) for more
+ * details.
+ */
+
 var gulp       = require('gulp'),
     jshint     = require('gulp-jshint'),
     browserify = require('gulp-browserify'),
     concat     = require('gulp-concat'),
     server     = require('gulp-express'),
     unzip      = require('gulp-unzip');
-//var browserify = require('browserify');
 
 gulp.task('deployr-deps', function(){  
   gulp.src('./.modules/*.zip')
     .pipe(unzip())
     .pipe(gulp.dest('./node_modules'))
-})
+});
 
-// tasks
 gulp.task('lint', function() {
-  gulp.src(['!./client/app/js/bundled.js', 
-    './client/app/**/*.js', 
-    '!./client/app/bower_components/**/*',
-      '!./client/app/js/vendor/**/*'])
+  gulp.src([ '!./client/app/js/bundled.js', 
+             './client/app/**/*.js', 
+             '!./client/app/bower_components/**/*',
+             '!./client/app/js/vendor/**/*' ])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
@@ -43,7 +52,7 @@ gulp.task('server', function () {
     gulp.watch(['client/app/**/*.html'], server.notify);
     gulp.watch(['client/app/js/**/*.js'], ['lint', 'browserify']);
     gulp.watch(['client/app/css/**/*.css']);
-    gulp.watch(['app.js', 'server/routes/**/*.js'], [server.run]);
+    //gulp.watch(['app.js', 'server/routes/**/*.js'], [server.run]);
 });
 
 gulp.task('default', ['lint', 'browserify', 'server'] );

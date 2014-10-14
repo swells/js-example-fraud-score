@@ -8,7 +8,7 @@
     "postinstall": "bower install && gulp deployr-deps"
   },
   "main": "gulpfile.js",
-  "author": "",
+  "author": "DeployR - Revolution Analytics Inc.",
   "main": "app.js",
   "dependencies": {
     "gulp": "^3.8.7",
@@ -20,7 +20,6 @@
     "browserify": "^5.10.0",
     "primus": "^2.4.8",
     "express": "^4.9.5",
-    "ejs": "^1.0.0",
     "ws": "^0.4.32",
     "primus.io": "^3.1.2",
     "primus-multiplex": "^3.0.3",

@@ -31,7 +31,7 @@
  * Execute click -> $scope.executeTasks() -> GET:/fraud/score/{tasks}
  *
  */
-module.exports = function($scope, $http) {
+module.exports = function($scope, $http, $location) {
 
    //
    // ng-controller model on $scope.
@@ -106,15 +106,14 @@ module.exports = function($scope, $http) {
          });
    };
 
-   var primus = Primus.connect('ws://localhost:9080');
+   var primus = Primus.connect('ws://localhost:' + $location.port());
 
    // Subscribe for events on /topic/fraud.
    primus.on('open', function() {
 
-      primus.on('/topic/fraud', function(msg) {
-         var msgObj = msg;
+      primus.on('/topic/fraud', function(msgObj) {
 
-         if (msgObj.msgType == 'FRAUDSCORE') {
+         if (msgObj.msgType === 'FRAUDSCORE') {
 
             var elapsedTime = Date.now() - $scope.startTaskThroughput;
 
@@ -126,7 +125,6 @@ module.exports = function($scope, $http) {
                   (1000 / elapsedTime) * $scope.currentTaskThroughput;
                $scope.secondTaskThroughput =
                   +(Math.round((throughput - (throughput % 0.01)) + 'e+2') + 'e-2');
-               //(throughput - (throughput % 0.01));
                $scope.minuteTaskThroughput =
                   Math.round($scope.secondTaskThroughput * 60);
 
@@ -137,15 +135,14 @@ module.exports = function($scope, $http) {
                }
                $scope.fraudScoreResults.unshift(msgObj);
             });
-         } else
-         if (msgObj.msgType == 'RUNTIMESTATS') {
+
+         } else if (msgObj.msgType === 'RUNTIMESTATS') {
             // $apply to propogate change to model.
             $scope.$apply(function() {
                $scope.alertMessage = null;
                $scope.runtimeStats = msgObj;
             });
-         } else
-         if (msgObj.msgType == 'CLIENTALERT') {
+         } else if (msgObj.msgType === 'CLIENTALERT') {
             // $apply to propogate change to model.
             $scope.$apply(function() {
                $scope.alertMessage = msgObj.msg;

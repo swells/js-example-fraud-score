@@ -1,9 +1,7 @@
 {
   "name": "js-example-fraud-score",
-  "version": "0.0.1",
-  "authors": [
-    "Sean wells <sean.wells.sc@gmail.com>"
-  ],
+  "version": "0.0.1",  
+  "authors": [ "DeployR - Revolution Analytics Inc." ],
   "license": "Apache License 2.0",
   "ignore": [
     "**/.*",
