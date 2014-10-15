@@ -39,8 +39,8 @@ npm.
    $ npm install
    ```
 
-5. Set the DeployR server `host` location *if* not running at
-   `http://localhost:7300` in the configuration file `config/config.json` 
+5. Set the DeployR server `host` location *if* not running at `localhost` in the
+   configuration file `config/config.json` 
 
 6. Run locally: 
 
