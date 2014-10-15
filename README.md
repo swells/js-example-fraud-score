@@ -10,6 +10,7 @@ on `localhost`. If your instance of DeployR is running at some other IP address
 then please udpate the `host` location property in the configuration file 
 `config/config.json`.
 
+
 1. Download and install [Node.js](http://nodejs.org/download/), which ships with 
 npm.
 
