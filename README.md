@@ -5,6 +5,11 @@ Example use of DeployR as a real-time, R analytics scoring engine.
 
 ## Example Quick Start
 
+By default, the example assumes an instance of the **DeployR server** is running 
+on `localhost`. If your instance of DeployR is running at some other IP address 
+then please udpate the `host` location property in the configuration file 
+`config/config.json`.
+
 1. Download and install [Node.js](http://nodejs.org/download/), which ships with 
 npm.
 
@@ -284,7 +289,7 @@ We recommend experimenting with the size of the pool and observing the effect
 this has on throughput. See the following sections of the _RBroker Framework_ 
 tutorial for related details:
 
-- [simulations](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#simulation)
-- [profiling](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#profiling)
-- [resource management](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#gridprimer) 
+- [Client Application Simulations](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#simulation)
+- [Client Application Profiling](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#profiling)
+- [Grid Resource Management](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#gridprimer) 
 
