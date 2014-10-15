@@ -17,7 +17,7 @@ npm.
 2. Clone the repository:
 
    ```
-   $ git clone https://github.com/swells/js-example-fraud-score.git
+   $ git clone https://github.com/deployr/js-example-fraud-score.git
    $ cd js-example-fraud-score
    ```
 

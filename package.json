@@ -2,7 +2,7 @@
   "name": "js-example-fraud-score",
   "version": "0.0.1",
   "description": "R Analytics Fraud Score Example Application - Powered by DeployR RBroker Framework",
-  "repository": "https://github.com/swells/js-example-fraud-score.git",
+  "repository": "https://github.com/deployr/js-example-fraud-score.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "bower install && gulp deployr-deps"

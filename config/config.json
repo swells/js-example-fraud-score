@@ -1,7 +1,6 @@
 {
-	"host": "http://184.106.156.215:7300",
+	"host": "http://localhost:7300",
 	"port": "9080",
-	"poolSize": 1, 
 	"credentials": {
 	   "username": "testuser",
 	   "password": "changeme"
