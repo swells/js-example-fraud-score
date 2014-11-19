@@ -26,8 +26,8 @@ var primus = new Primus(server, { transformer: 'websockets', parser: 'JSON' });
 primus.on('connection', function (spark) {
     var fraudService = new FraudService(primus);
    
-    router.get('/fraud/score/:tasks', function(req, res) {    	
-    	 var tasks = req.params.tasks === 0 ? 1 : req.params.tasks;
+    router.get('/fraud/score/:tasks', function(req, res) {      
+       var tasks = req.params.tasks === 0 ? 1 : req.params.tasks;
        console.log('REST:/fraud/score/' + tasks + ' called.');
 
        for(var i = 0; i < tasks; i++) {
@@ -38,10 +38,10 @@ primus.on('connection', function (spark) {
     });
 
     router.post('/fraud/pool/init/:size', function (req, res) {
-    	var size = req.params.size === 0 ? 1 : req.params.size;
-    	console.log('REST:/pool/init/' + size + ' called.');
+      var size = req.params.size === 0 ? 1 : req.params.size;
+      console.log('REST:/pool/init/' + size + ' called.');
 
-    	fraudService.buildPool(size);
+      fraudService.buildPool(size);
       res.json({ success: true });
     });
 });
