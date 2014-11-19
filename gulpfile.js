@@ -13,14 +13,7 @@ var gulp       = require('gulp'),
     jshint     = require('gulp-jshint'),
     browserify = require('gulp-browserify'),
     concat     = require('gulp-concat'),
-    server     = require('gulp-express'),
-    unzip      = require('gulp-unzip');
-
-gulp.task('deployr-deps', function(){  
-  gulp.src('./.modules/*.zip')
-    .pipe(unzip())
-    .pipe(gulp.dest('./node_modules'))
-});
+    server     = require('gulp-express');
 
 gulp.task('lint', function() {
   gulp.src([ '!./client/app/js/bundled.js', 
