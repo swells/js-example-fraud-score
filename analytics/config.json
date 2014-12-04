@@ -1,4 +1,5 @@
 {
+   "requirePassword": true,
    "repository": [{
       "file": {
          "filename": "ccFraudScore.R",

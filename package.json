@@ -5,7 +5,8 @@
   "repository": "https://github.com/deployr/js-example-fraud-score.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "start": "node ./node_modules/.bin/gulp",
   },
   "main": "gulpfile.js",
   "author": "DeployR - Revolution Analytics Inc.",

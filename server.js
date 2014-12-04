@@ -51,6 +51,11 @@ primus.on('disconnection', function () {
 });
 
 // -- Start server --
-server.listen(config.port, function(){
-  console.log('\033[96mlistening on localhost:' + config.port +' \033[39m');
+server.listen(config.port, function() {
+  setTimeout(function() {
+    console.log('Project property (DeployR endpoint) override: ' +process.env.endpoint);
+    console.log('Project property (DeployR username) override: ' + process.env.username);
+    console.log('Project property (DeployR password) override: [HIDDEN]');  
+    console.log('\033[96mlistening on http://localhost:' + config.port +' \033[39m');
+  }, 1000);
 });
