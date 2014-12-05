@@ -27,13 +27,20 @@ var round = function(num) {
     return +(Math.round(num + 'e+2')  + 'e-2');
 };
 
+// -- property overrides ---
+config.host = process.env.endpoint || config.host;
+config.credentials = {
+  username: process.env.username || config.credentials.username,
+  password: process.env.password || config.credentials.password
+};
+
 function FraudService(primus) {
    this.primus = primus;
    this.broker = null;
    this.lastAllocatedPoolSize = 0;
    this.brokerConfig = {
       maxConcurrentTaskLimit: 0,
-      host: config.host,
+      host: process.env.endpoint || config.host,
       credentials: config.credentials,
       releaseGridResources: true,
       logging: config.logging,
