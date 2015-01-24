@@ -53,7 +53,7 @@ primus.on('disconnection', function () {
 // -- Start server --
 server.listen(config.port, function() {
   setTimeout(function() {
-    var endpoint = process.env.endpoint || config.host,
+    var endpoint = process.env.endpoint || config.endpoint,
         username = process.env.username || config.credentials.username;
 
     console.log('\n\n');

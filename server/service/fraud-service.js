@@ -27,13 +27,6 @@ var round = function(num) {
     return +(Math.round(num + 'e+2')  + 'e-2');
 };
 
-// -- property overrides ---
-config.endpoint = process.env.endpoint || config.endpoint;
-config.credentials = {
-  username: process.env.username || config.credentials.username,
-  password: process.env.password || config.credentials.password
-};
-
 function FraudService(primus) {
    this.primus = primus;
    this.broker = null;
@@ -41,12 +34,15 @@ function FraudService(primus) {
    this.brokerConfig = {
       maxConcurrentTaskLimit: 0,
       endpoint: process.env.endpoint || config.endpoint,
-      credentials: config.credentials,
+      credentials: {
+        username: process.env.username || config.credentials.username,
+        password: process.env.password || config.credentials.password
+      },
       releaseGridResources: true,
       logging: config.logging,
       pool: {
          preloadobjectname: config.constants.FRAUD_MODEL,
-         preloadobjectauthor: config.credentials.username, //config.constants.REPO_OWNER,
+         preloadobjectauthor: config.credentials.username,
          preloadobjectdirectory: config.constants.REPO_DIRECTORY
       }
    };
