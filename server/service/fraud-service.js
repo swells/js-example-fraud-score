@@ -28,7 +28,7 @@ var round = function(num) {
 };
 
 // -- property overrides ---
-config.host = process.env.endpoint || config.host;
+config.endpoint = process.env.endpoint || config.endpoint;
 config.credentials = {
   username: process.env.username || config.credentials.username,
   password: process.env.password || config.credentials.password
@@ -40,7 +40,7 @@ function FraudService(primus) {
    this.lastAllocatedPoolSize = 0;
    this.brokerConfig = {
       maxConcurrentTaskLimit: 0,
-      host: process.env.endpoint || config.host,
+      endpoint: process.env.endpoint || config.endpoint,
       credentials: config.credentials,
       releaseGridResources: true,
       logging: config.logging,
@@ -164,7 +164,7 @@ FraudService.prototype = {
          msgType: MSG_TYPES.runtime,
          requestedPoolSize: this.brokerConfig.maxConcurrentTaskLimit,
          allocatedPoolSize: this.lastAllocatedPoolSize,
-         endpoint: this.brokerConfig.host
+         endpoint: this.brokerConfig.endpoint
       };
 
       if (this.brokerConfig.credentials) {
