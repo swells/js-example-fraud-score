@@ -33,7 +33,7 @@ function FraudService(primus) {
    this.lastAllocatedPoolSize = 0;
    this.brokerConfig = {
       maxConcurrentTaskLimit: 0,
-      endpoint: process.env.endpoint || config.endpoint,
+      host: process.env.endpoint || config.endpoint,
       credentials: {
         username: process.env.username || config.credentials.username,
         password: process.env.password || config.credentials.password

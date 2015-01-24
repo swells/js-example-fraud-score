@@ -52,16 +52,14 @@ primus.on('disconnection', function () {
 
 // -- Start server --
 server.listen(config.port, function() {
-  setTimeout(function() {
-    var endpoint = process.env.endpoint || config.endpoint,
-        username = process.env.username || config.credentials.username;
+  var endpoint = process.env.endpoint || config.endpoint,
+      username = process.env.username || config.credentials.username;
 
-    console.log('\n\n');
-    console.log('============================================================');
-    console.log(' Project property (DeployR endpoint): ' + endpoint);
-    console.log(' Project property (DeployR username): ' + username);
-    console.log(' Project property (DeployR password): [HIDDEN] \n');
-    console.log('\033[96m Example listening on http://localhost:' + config.port +' \033[39m');
-    console.log('============================================================');
-  }, 1000);
+  console.log('\n\n');
+  console.log('==============================================================');
+  console.log(' Project property (DeployR endpoint): ' + endpoint);
+  console.log(' Project property (DeployR username): ' + username);
+  console.log(' Project property (DeployR password): [HIDDEN] \n');
+  console.log('\033[96m Example listening on http://localhost:' + config.port +' \033[39m');
+  console.log('==============================================================');
 });
