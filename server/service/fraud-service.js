@@ -46,7 +46,7 @@ function FraudService(primus) {
       logging: config.logging,
       pool: {
          preloadobjectname: config.constants.FRAUD_MODEL,
-         preloadobjectauthor: config.constants.REPO_OWNER,
+         preloadobjectauthor: config.credentials.username, //config.constants.REPO_OWNER,
          preloadobjectdirectory: config.constants.REPO_DIRECTORY
       }
    };

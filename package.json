@@ -5,8 +5,7 @@
     "repository": "https://github.com/deployr/js-example-fraud-score.git",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "postinstall": "bower install",
-        "start": "node ./node_modules/.bin/gulp"
+        "start": "node node_modules/.bin/browserify ./client/app/js/main.js > ./client/app/js/bundled.js && node server.js"
     },
     "main": "gulpfile.js",
     "author": "DeployR - Revolution Analytics Inc.",
@@ -14,11 +13,6 @@
     "dependencies": {
         "deployr": "7.3.0",
         "rbroker": "7.3.0",
-        "gulp": "^3.8.7",
-        "gulp-jshint": "^1.8.4",
-        "gulp-concat": "^2.3.4",
-        "gulp-browserify": "^0.5.0",
-        "bower": "^1.3.9",
         "browserify": "^5.10.0",
         "primus": "^2.4.8",
         "express": "^4.9.5",
@@ -26,8 +20,7 @@
         "primus.io": "^3.1.2",
         "primus-multiplex": "^3.0.3",
         "primus-emitter": "^3.0.3",
-        "primus-rooms": "^3.1.0",
-        "gulp-express": "^0.1.0"
+        "primus-rooms": "^3.1.0"
     },
     "license": "Apache License 2.0"
 }
