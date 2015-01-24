@@ -160,7 +160,7 @@ FraudService.prototype = {
          msgType: MSG_TYPES.runtime,
          requestedPoolSize: this.brokerConfig.maxConcurrentTaskLimit,
          allocatedPoolSize: this.lastAllocatedPoolSize,
-         endpoint: this.brokerConfig.endpoint
+         endpoint: this.brokerConfig.host
       };
 
       if (this.brokerConfig.credentials) {
