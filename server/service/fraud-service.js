@@ -42,7 +42,7 @@ function FraudService(primus) {
       logging: config.logging,
       pool: {
          preloadobjectname: config.constants.FRAUD_MODEL,
-         preloadobjectauthor: config.credentials.username,
+         preloadobjectauthor: process.env.username || config.credentials.username,
          preloadobjectdirectory: config.constants.REPO_DIRECTORY
       }
    };
@@ -75,7 +75,7 @@ FraudService.prototype = {
       return rbroker.pooledTask({
          filename: config.constants.REPO_SCRIPT,
          directory: config.constants.REPO_DIRECTORY,
-         author: config.constants.REPO_OWNER,
+         author: this.brokerConfig.credentials.username,
          routputs: ['x'],
          rinputs: [RIn.numeric('bal', bal),
             RIn.numeric('trans', trans),
