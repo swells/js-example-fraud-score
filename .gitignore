@@ -1,4 +1,3 @@
 node_modules/
-client/app/js/bundled.js
 npm-debug.log
 .DS_Store
