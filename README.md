@@ -158,11 +158,6 @@ JSON message delivered over a WebSocket channel.
 
 **Note** The preferred way to install this example is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI).
 
-By default, the example assumes an instance of the **DeployR server** is running 
-on `localhost`. If your instance of DeployR is running at some other IP address 
-then please udpate the `endpoint` location property in the configuration file 
-`config/config.json`.
-
 1. Download and install [Node.js](http://nodejs.org/download/), which ships with 
 npm.
 
