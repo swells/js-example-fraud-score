@@ -205,6 +205,10 @@ file `config/config.json` as appropriate:
 To run this example application:
 
 ```
+$ cd js-example-fraud-score
+```
+
+```
 $ npm start
 ```
 
