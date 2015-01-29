@@ -7,7 +7,7 @@ Example use of DeployR as a real-time, R analytics scoring engine.
 
 There are two ways to install this example:
 
-1. The preferred way is to use the [DeployR command line interface](https://github.com/deployr-cli) (CLI) to install.
+1. The preferred way is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI) to install.
 
 2. [Manual installation](#manual-installation) without the DeployR CLI.
 
