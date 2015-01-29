@@ -9,7 +9,7 @@ There are two ways to install this example:
 
 1. The preferred way is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI) to install.
 
-2. [Manual installation](#manual-installation) without the DeployR CLI.
+2. [Manual Installation](#manual-installation) without the DeployR CLI.
 
 ### Manual installation
 
