@@ -3,11 +3,19 @@ js-example-fraud-score
 
 Example use of DeployR as a real-time, R analytics scoring engine.
 
-## Example Quick Start
+## Installation
+
+There are two ways to install this example:
+
+1. The prefred way is to use the [DeployR command line interface](#https://github.com/deployr-cli) (CLI) to install.
+
+2. [Manual installation](#manual-installation) without the DeployR CLI.
+
+### Manual installation
 
 By default, the example assumes an instance of the **DeployR server** is running 
 on `localhost`. If your instance of DeployR is running at some other IP address 
-then please udpate the `host` location property in the configuration file 
+then please udpate the `endpoint` location property in the configuration file 
 `config/config.json`.
 
 
@@ -21,34 +29,22 @@ npm.
    $ cd js-example-fraud-score
    ```
 
-3. Install the global dependencies:
-
-   ```
-   $ npm install -g gulp bower browserify
-   ```
-
-   You might need `sudo` for globally installed packages, in that case:
-
-   ```
-   $ sudo npm install -g gulp bower browserify
-   ```
-
-4. Install the local dependencies: 
+3. Install the dependencies:
 
    ```
    $ npm install
    ```
 
-5. Set the DeployR server `host` location *if* not running at `localhost` in the
-   configuration file `config/config.json` 
+4. Set the DeployR server `endpoint` location *if* not running at `localhost` in 
+   the configuration file `config/config.json` 
 
-6. Run locally: 
+5. Run locally: 
 
    ```
-   $ gulp
+   $ npm start
    ```
 
-7.  Point your browser to `http://localhost:9080`
+6.  Point your browser to `http://localhost:9080`
 
 
 ## About
@@ -195,20 +191,14 @@ JSON message delivered over a WebSocket channel.
 
 ## Running the Example
 
-A [gulp.js](http://gulpjs.com/) build script is provided to run the example:
-
-```
-gulpfile.js
-```
-
 By default, the build configuration assumes an instance of the DeployR server
 is running on `localhost`. If your instance of DeployR is running at some
-other IP address then please update the `host` property in the configuration 
+other IP address then please update the `endpoint` property in the configuration 
 file `config/config.json` as appropriate:
 
 ```
 {
-   "host": "http://localhost:7300",
+   "endpoint": "http://localhost:7300",
    "port": "9080",
    "credentials": {
       "username": "testuser",
@@ -227,7 +217,7 @@ file `config/config.json` as appropriate:
 To run this example application:
 
 ```
-$ gulp
+$ npm start
 ```
 
 Observe the console output in your terminal window to determine if the server 
@@ -296,7 +286,7 @@ tutorial for related details:
 
 ## License ##
 
-Copyright (C) 2010-2014 by Revolution Analytics Inc.
+Copyright (C) 2010-2015 by Revolution Analytics Inc.
 
 This program is licensed to you under the terms of Version 2.0 of the
 Apache License. This program is distributed WITHOUT
