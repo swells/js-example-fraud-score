@@ -156,7 +156,7 @@ JSON message delivered over a WebSocket channel.
 
 ## Manual Installation
 
-**Note** The preferred way to install this example is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI) to install.
+**Note** The preferred way to install this example is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI).
 
 By default, the example assumes an instance of the **DeployR server** is running 
 on `localhost`. If your instance of DeployR is running at some other IP address 
