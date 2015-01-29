@@ -11,41 +11,6 @@ There are two ways to install this example:
 
 2. [Manual Installation](#manual-installation) without the DeployR CLI.
 
-### Manual installation
-
-By default, the example assumes an instance of the **DeployR server** is running 
-on `localhost`. If your instance of DeployR is running at some other IP address 
-then please udpate the `endpoint` location property in the configuration file 
-`config/config.json`.
-
-
-1. Download and install [Node.js](http://nodejs.org/download/), which ships with 
-npm.
-
-2. Clone the repository:
-
-   ```
-   $ git clone https://github.com/deployr/js-example-fraud-score.git
-   $ cd js-example-fraud-score
-   ```
-
-3. Install the dependencies:
-
-   ```
-   $ npm install
-   ```
-
-4. Set the DeployR server `endpoint` location *if* not running at `localhost` in 
-   the configuration file `config/config.json` 
-
-5. Run locally: 
-
-   ```
-   $ npm start
-   ```
-
-6.  Point your browser to `http://localhost:9080`
-
 
 ## About
 
@@ -189,6 +154,34 @@ the server application REST API.
 The _score_ generated per request is returned to the client application within a 
 JSON message delivered over a WebSocket channel.
 
+## Manual Installation
+
+**Note** The preferred way is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI) to install.
+
+By default, the example assumes an instance of the **DeployR server** is running 
+on `localhost`. If your instance of DeployR is running at some other IP address 
+then please udpate the `endpoint` location property in the configuration file 
+`config/config.json`.
+
+1. Download and install [Node.js](http://nodejs.org/download/), which ships with 
+npm.
+
+2. Clone the repository:
+
+   ```
+   $ git clone https://github.com/deployr/js-example-fraud-score.git
+   $ cd js-example-fraud-score
+   ```
+
+3. Install the dependencies:
+
+   ```
+   $ npm install
+   ```
+
+4. Set the DeployR server `endpoint` location *if* not running at `localhost` in 
+   the configuration file `config/config.json` 
+
 ## Running the Example
 
 By default, the build configuration assumes an instance of the DeployR server
@@ -283,6 +276,40 @@ tutorial for related details:
 - [Client Application Simulations](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#simulation)
 - [Client Application Profiling](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#profiling)
 - [Grid Resource Management](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#gridprimer) 
+
+## Example Quicks Start
+
+By default, the example assumes an instance of the **DeployR server** is running 
+on `localhost`. If your instance of DeployR is running at some other IP address 
+then please udpate the `endpoint` location property in the configuration file 
+`config/config.json`.
+
+1. Download and install [Node.js](http://nodejs.org/download/), which ships with 
+npm.
+
+2. Clone the repository:
+
+   ```
+   $ git clone https://github.com/deployr/js-example-fraud-score.git
+   $ cd js-example-fraud-score
+   ```
+
+3. Install the dependencies:
+
+   ```
+   $ npm install
+   ```
+
+4. Set the DeployR server `endpoint` location *if* not running at `localhost` in 
+   the configuration file `config/config.json` 
+
+5. Run locally: 
+
+   ```
+   $ npm start
+   ```
+
+6.  Point your browser to `http://localhost:9080`
 
 ## License ##
 
