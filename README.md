@@ -276,6 +276,12 @@ tutorial for related details:
 - [Client Application Profiling](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#profiling)
 - [Grid Resource Management](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#gridprimer) 
 
+## Building
+
+```
+./node_modules/.bin/browserify client/app/js/main.js > client/app/js/bundle.js
+```
+
 ## License ##
 
 Copyright (C) 2010-2015 by Revolution Analytics Inc.
