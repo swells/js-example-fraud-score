@@ -278,8 +278,10 @@ tutorial for related details:
 
 ## Building
 
+To build the _Client_ portion of the application:
+
 ```
-./node_modules/.bin/browserify client/app/js/main.js > client/app/js/bundle.js
+$ ./node_modules/.bin/browserify client/app/js/main.js > client/app/js/bundle.js
 ```
 
 ## License ##
